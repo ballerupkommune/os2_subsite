@@ -1,0 +1,73 @@
+<?php
+/**
+ * @file
+ * Code for the OS2sub Banner feature.
+ */
+
+
+
+
+function os2sub_blocks_install() {
+ $info = 'Footer åbningstider';
+ $body = '<p>Mandag 6-17<br /> Tirsdag 6-17<br /> Onsdag 6-17<br /> Torsdag 6-21<br /> Fredag 6-15</p> <p>Uden for åbningstiden kan vi træffes på <a href="mailto:info@balk.dk">email</a></p>';
+ $machine_name = 'os2sub_blocks_abningstider';
+ $format = 'full_html';
+ $region = 'footer5';
+ $title = 'Åbningstider';
+ $themes =  array('subsite_1_color');
+ _os2sub_blocks_create_block ($info, $format, $machine_name, $title, $body, $themes, $region);
+}
+
+function  _os2sub_blocks_create_block ($info, $format, $machine_name, $title='', $body='',  $themes= array(),  $region = NULL, $weight = 0, $visibility = 0, $pages = '') {
+  if (!_os2sub_blocks_block_exist($info)) {
+  $settings = new stdClass;
+  $settings->info = $info;
+  $settings->format = $format;
+  $settings->title = $title;
+  $settings->machine_name = $machine_name;
+  $settings->body = $body;
+  
+  $block = (array) $settings;
+  drupal_write_record('block_custom', $block);
+
+  //Save more info
+  _os2sub_blocks_add_block_info($block['bid'], $block['title'], 'block', $weight, $themes, $region);
+ } 
+}
+function _os2sub_blocks_add_block_info($delta, $title, $module='block', $weight = 0, $themes =  array(), $region = NULL, $visibility = 0, $pages = '') {
+    
+  foreach ($themes as $theme){
+    $settings = new stdClass;
+    $settings->module = $module;
+    $settings->delta = $delta;
+    $settings->theme = $theme;
+    $settings->status = 1;
+    $settings->weight = $weight;
+    $settings->region = -1;
+    $settings->custom = 0;
+    $settings->visibility = $visibility;
+    $settings->pages = $pages;
+    $settings->title = $title;
+    $settings->cache -1;
+
+    if ($region) {
+      $settings->region = $region;
+    }
+
+    $block = (array) $settings;
+
+    drupal_write_record('block', $block);
+  }
+}
+/*
+ * Check if block exists
+ */
+function _os2sub_blocks_block_exist($info) {
+  
+  $query = db_select('block_custom', 'b');
+  $query->condition('b.info', $info);
+  $query->addExpression('COUNT(*)');
+  
+  $result = $query->execute()->fetchField();
+  return ($result) ? TRUE : FALSE;
+}

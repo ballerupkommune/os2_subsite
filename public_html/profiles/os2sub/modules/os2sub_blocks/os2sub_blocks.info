@@ -1,0 +1,7 @@
+name = OS2sub Blocks
+core = 7.x
+package = OS2Sub
+version = 7.x-1.0
+project = os2sub_blocks
+
+dependencies[] = block
