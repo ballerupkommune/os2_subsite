@@ -17,6 +17,11 @@
                 $path = drupal_get_path_alias('node/' . $node->nid);
                 print $html = '<img class="img-responsive" title = "' . $image["title"] . '" src="' . $public_filename . '"/>';
                 ?>
+                <span class="date-in-parts" style="display: block;">
+                   <span class="day"><?php  echo date("j", $node->created); ?>. </span>
+                   <span class="month"><?php echo t(date("F", $node->created)); ?></span>
+                   <span class="year"><?php echo date("Y", $node->created); ?></span>
+                </span>
               </span>
               <span class="col-xs-10" style="display: block;">
                 <span class="nyheder-title">
@@ -26,11 +31,6 @@
                   <?php if (!isset($content['field_os2web_base_field_summary'])) :
                      print render($content['body']); endif; ?>
                   <?php print render($content['field_os2web_base_field_summary']); ?>
-                </span>
-                <span class="date-in-parts" style="display: block;">
-                   <span class="day"><?php  echo date("j", $node->created); ?>. </span>
-                   <span class="month"><?php echo t(date("F", $node->created)); ?></span>
-                   <span class="year"><?php echo date("Y", $node->created); ?></span>
                 </span>
 
               </span>
