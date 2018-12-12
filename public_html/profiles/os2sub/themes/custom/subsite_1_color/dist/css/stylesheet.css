@@ -14285,6 +14285,9 @@ span.expandmore__button.js-expandmore-button .toggle-wrap .accordion__toggle spa
 .field-name-body a {
   text-decoration: underline;
 }
+.field-name-field-paragraph-text a {
+  text-decoration: underline;
+}
 @media screen {
 }
 @media screen and (max-width: 767px) {
