@@ -20,7 +20,12 @@
             <?php print $title; ?>
         </h4>
 
-        <?php if (isset($content['body'])): ?>
+        <?php if (isset($content['field_os2web_base_field_summary'])) : ?>
+            <span class="subsite-teaser-body-content">
+                <?php print render($content['field_os2web_base_field_summary']); ?>
+            </span>
+
+        <?php elseif (isset($content['body'])): ?>
             <span class="subsite-teaser-body-content">
                 <?php print render($content['body']); ?>
             </span>

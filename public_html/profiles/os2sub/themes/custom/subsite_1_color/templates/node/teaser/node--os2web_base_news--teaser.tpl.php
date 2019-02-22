@@ -1,3 +1,4 @@
+
 <?php if ( !$page ) : ?>
   <a href="<?php
   global $base_url;
