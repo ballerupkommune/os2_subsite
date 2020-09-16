@@ -42,7 +42,7 @@
  */
 ?>
 <?php if ($block->delta != 'main'): ?>
-<section role="region" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<section class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <div class="inner">
   <?php endif; ?>
 

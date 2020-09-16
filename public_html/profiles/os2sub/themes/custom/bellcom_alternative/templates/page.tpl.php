@@ -132,7 +132,10 @@
 
           </nav>
           <section role="search" class="col-md-3">
-            <?php print $search_box; ?>
+            <label for="edit-keys" class="sr-only">
+              Hvad søger du?
+            </label>
+            <?php print $search_box_desktop; ?>
           </section>
         </div>
       </div>
@@ -169,7 +172,12 @@
     <?php endif; ?>
 
     <a id="main-content"></a>
-    <div class="visible-xs-block visible-sm-block"><?php print $search_box; ?></div>
+    <div class="visible-xs-block visible-sm-block">
+      <label for="edit-keys-responsive" class="sr-only">
+        Hvad søger du?
+      </label>
+      <?php print $search_box_responsive; ?>
+    </div>
     <?php if (!panels_get_current_page_display()): ?>
       <div class="os2sub-box">
         <?php if (empty($node) ) { ?>
@@ -230,7 +238,7 @@
                       'path' => $uri,
                       'style_name' => 'footer_branding',
                       'alt' => 'Ballerup logo',
-                    ),
+                    )
                   ); ?>
                 <?php endif;?>
                  <?php endif;?>

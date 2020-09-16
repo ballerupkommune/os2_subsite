@@ -9,11 +9,21 @@ function subsite_1_color_process_html(&$variables) {
 
 function subsite_1_color_process_page(&$variables, $hook) {
   $search_box = drupal_render(drupal_get_form('search_form'));
-  $variables['search_box'] = $search_box;
- if (module_exists('color')) {
- _color_page_alter($variables);
- }
+
+  // Responsive.
+  $search_box_responsive = str_replace('search-form', 'search-form-responsive', $search_box);
+  $search_box_responsive = str_replace('edit-basic', 'edit-basic-responsive', $search_box_responsive);
+  $search_box_responsive = str_replace('edit-keys', 'edit-keys-responsive', $search_box_responsive);
+  $search_box_responsive = str_replace('edit-submit', 'edit-submit-responsive', $search_box_responsive);
+  $variables['search_box_responsive'] = $search_box_responsive;
+
+  $variables['search_box_desktop'] = $search_box;
+
+  if (module_exists('color')) {
+    _color_page_alter($variables);
+  }
 }
+
 /**
  * Implements theme_preprocess_html().
  */
@@ -53,7 +63,7 @@ function subsite_1_color_preprocess_html(&$variables) {
       'type' => 'text/css',
     ),
   ), 'google_font_subsite_1');
-  
+
   // Body classes
   // $variables['classes_array'][] = 'footer-attached';
 
@@ -109,16 +119,16 @@ function subsite_1_color_preprocess_node__full(&$variables) {
 function subsite_1_menu_local_task($variables) {
   $link = $variables['element']['#link'];
   $link_text = $link['title'];
-  
+
   $page_args = unserialize($link['page_arguments']); // Gets the view name and display type
   // Could be useful if we want to restrict it to certain views and displays.
 
   $view = views_get_view($page_args[0]);
   $view->set_display($page_args[1]);
   $output = $view->preview();
-/* If result is empty return here this hides the tab from showing up. However the page will still be visible when someone tries to visit the page directly. If we want to completely hide the view then the above solution is more appropriate. 
+/* If result is empty return here this hides the tab from showing up. However the page will still be visible when someone tries to visit the page directly. If we want to completely hide the view then the above solution is more appropriate.
 */
-/* if (empty($view->result)) {   
+/* if (empty($view->result)) {
     return;
   }
    // code to genrate your li or however the theme creates tab markup

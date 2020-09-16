@@ -763,6 +763,7 @@
     a {
       color: #6dcff6;
       padding-left: 0;
+      text-decoration: underline;
       &:hover {
         background-color: transparent;
       }
@@ -852,6 +853,10 @@
           background-color: transparent;
           padding: floor((@grid-gutter-width/4)) 0;
           font-size: 1.2em;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -953,6 +958,13 @@
     float: none;
     display: inline;
   }
+  .form-control {
+
+    &:focus {
+      outline: 4px solid #747474;
+      outline-offset: 1px;
+    }
+  }
   & input[type="text"]:-moz-placeholder,
   & input[type="text"]::-webkit-input-placeholder,
   & input[type="text"]::-moz-placeholder,
@@ -974,15 +986,8 @@
   }
 }
 
-.main-navigation-bar::before {
-  content: '';
+.main-navigation-bar {
   background-color: @brand-primary;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.8;
 }
 
 .main-navigation-bar input[type="text"]::-webkit-input-placeholder {
