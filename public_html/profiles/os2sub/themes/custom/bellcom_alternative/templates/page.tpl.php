@@ -124,7 +124,7 @@
     <div class="main-navigation-bar" id="main-navigation-bar">
       <div class="container nav-container">
         <div class="row">
-          <nav class="col-md-9" role="navigation">
+          <nav class="col-md-9">
 
             <?php if (isset($primary_navigation)): ?>
               <?php print render($primary_navigation); ?>
@@ -221,11 +221,17 @@
               <span class="branding-text">
                 <?php if (!empty($theme_settings['layout']['footer']['show_branding']) ): ?>
                 <?php if (empty($theme_settings['layout']['footer']['footer_branding_logo']) ): ?>
-                <span class="standard"><img src="<?php print base_path().path_to_theme().'/dist/img/ballerupbyvaaben.png' ?>"></span>
+                <span class="standard"><img src="<?php print base_path().path_to_theme().'/dist/img/ballerupbyvaaben.png' ?>" alt="Ballerup byvåben"></span>
                 <?php else:
                   $file = file_load((int) $theme_settings['layout']['footer']['footer_branding_logo']);
                   $uri = $file->uri;
-                  print theme('image_style', array('path' => $uri, 'style_name' => 'footer_branding')); ?>
+                  print theme('image_style',
+                    array(
+                      'path' => $uri,
+                      'style_name' => 'footer_branding',
+                      'alt' => 'Ballerup logo',
+                    ),
+                  ); ?>
                 <?php endif;?>
                  <?php endif;?>
                 <?php if ($theme_settings['layout']['footer']['show_branding_text']): ?>
